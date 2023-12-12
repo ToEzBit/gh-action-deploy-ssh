@@ -41,7 +41,6 @@ jobs:
       - name: Push Docker Image
         run: docker push toezbitaisoft/test-gh-action:latest
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: executing remote ssh commands using password
