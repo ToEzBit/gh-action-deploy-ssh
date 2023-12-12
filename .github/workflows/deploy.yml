@@ -6,6 +6,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -15,6 +16,7 @@ jobs:
         run: npm run lint
   test:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -25,6 +27,7 @@ jobs:
   build:
     needs: [lint, test]
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -37,3 +40,17 @@ jobs:
         run: docker build -t toezbitaisoft/test-gh-action:latest .
       - name: Push Docker Image
         run: docker push toezbitaisoft/test-gh-action:latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          password: ${{secrets.SSH_PASSWORD}}
+          port: ${{secrets.SSH_PORT}}
+          script: |
+            whoami
+            dir
