@@ -52,3 +52,4 @@ jobs:
           port: ${{secrets.SSH_PORT}}
           script: |
             mkdir kuy
+            mkdir bobo
