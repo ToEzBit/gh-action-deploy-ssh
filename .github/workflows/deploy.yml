@@ -6,7 +6,6 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -16,7 +15,6 @@ jobs:
         run: npm run lint
   test:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -27,7 +25,6 @@ jobs:
   build:
     needs: [lint, test]
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -41,6 +38,7 @@ jobs:
       - name: Push Docker Image
         run: docker push toezbitaisoft/test-gh-action:latest
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: executing remote ssh commands using password
