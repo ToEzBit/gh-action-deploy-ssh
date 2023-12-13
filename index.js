@@ -6,4 +6,4 @@ app.use("/", (req, res) => {
   res.json({ message: "Hello" });
 });
 
-app.listen(8888, () => console.log("server is running on port 88888"));
+app.listen(5173, () => console.log("server is running on port 88888"));
